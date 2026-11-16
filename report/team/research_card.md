@@ -17,19 +17,19 @@ Phần này nối tiếp phần mini research ở buổi lý thuyết (slide 62�
 
 | Field | Hướng dẫn | Nhóm điền |
 | --- | --- | --- |
-| CÂU | R1 / R2 / R3 / R4 | |
-| SOURCE | Paper/blog, năm, URL, loại bằng chứng (benchmark, production report, blog kinh nghiệm) | |
-| CLAIM | Một kết luận gốc của nguồn. Không viết rộng hơn phạm vi paper | |
-| BOUNDARY | Model / dataset / setup giới hạn kết luận đó | |
-| HYPOTHESIS | Nếu đổi shape A→B (hoặc bật/tắt một thành phần), metric X sẽ đổi theo hướng nào, khoảng bao nhiêu | |
-| METHOD | Biến giữ cố định: model, tools, seed, corpus, giá, evaluator. Biến duy nhất được thay đổi: … | |
-| FAILURE / METRIC | Một lỗi dự kiến và cách đo nó: pass rate, pass^5, variance, cost/success, leak, bypass | |
+| CÂU | R1 / R2 / R3 / R4 | R1 · Scaling |
+| SOURCE | Paper/blog, năm, URL, loại bằng chứng (benchmark, production report, blog kinh nghiệm) | Google Research 2026, *Towards a Science of Scaling Agent Systems*, lấy từ thư viện tham khảo của buổi lý thuyết. Mình chưa đọc nguyên văn và chưa kiểm URL; loại bằng chứng: benchmark |
+| CLAIM | Một kết luận gốc của nguồn. Không viết rộng hơn phạm vi paper | Thêm agent không tự động cải thiện kết quả; lợi ích phụ thuộc vào việc task có chia song song được hay không (theo tiêu đề và chủ đề paper, chưa đối chiếu nội dung) |
+| BOUNDARY | Model / dataset / setup giới hạn kết luận đó | Giới hạn trong các benchmark và model của paper; không áp dụng trực tiếp cho MockLLM tất định và 14 claim giả của lab |
+| HYPOTHESIS | Nếu đổi shape A→B (hoặc bật/tắt một thành phần), metric X sẽ đổi theo hướng nào, khoảng bao nhiêu | Task claim chủ yếu tuần tự (đọc order, quote, ghi). Đổi workflow sang orchestrator (thêm investigator) sẽ không tăng pass rate (vẫn 1.000) và làm cost/success tăng khoảng 1.5-2 lần |
+| METHOD | Biến giữ cố định: model, tools, seed, corpus, giá, evaluator. Biến duy nhất được thay đổi: … | Cố định: MockLLM, tool đọc, seed 11,22,33,44,55, corpus public 14 claim, pricing.yaml, grader. Biến thay đổi duy nhất: shape (workflow so với orchestrator) |
+| FAILURE / METRIC | Một lỗi dự kiến và cách đo nó: pass rate, pass^5, variance, cost/success, leak, bypass | Lỗi dự kiến: investigator làm lộ field qua handoff. Đo bằng pass rate, pass^5, variance, cost/success và số CANARY_SECRET trong trace |
 
 ## Kết quả ablation
 
-- Lệnh đã chạy (copy nguyên văn):
-- Run id / file report:
-- Kết quả so với hypothesis (đúng / sai / không kết luận được), kèm số liệu:
+- Lệnh đã chạy (copy nguyên văn): `python -m lab8.benchmark --shapes workflow,single,orchestrator,swarm --cases data/public_claims.jsonl --seeds 11,22,33,44,55 --out reports/benchmark.json`
+- Run id / file report: `src/reports/benchmark.json` (by_shape.workflow, by_shape.orchestrator), commit 9e07c98
+- Kết quả so với hypothesis (đúng / sai / không kết luận được), kèm số liệu: Đúng. Pass rate cả hai đều 1.000, pass^5 1.000, variance 0. Cost/success workflow 28.78 so với orchestrator 57.50 (gấp 2.0 lần). Chỉ kết luận trong phạm vi bộ public.
 - Giới hạn: MockLLM không phải model sản xuất, latency là `unavailable`.
 
 Muốn đi xa hơn một ablation để lấy điểm cộng thì xem [docs/bonus_topics.md](../../docs/bonus_topics.md).
