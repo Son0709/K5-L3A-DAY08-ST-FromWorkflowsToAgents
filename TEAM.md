@@ -19,7 +19,7 @@
 
 | Người | Vai | Commit | Test đã thêm hoặc sửa |
 | --- | --- | --- | --- |
-| Lê Hoàng Sơn | Cả ba shape, benchmark, báo cáo | ab4980b (workflow), bae4f5e (single), 9e07c98 (orchestrator) | `src/tests/test_workflow_shape.py` |
+| Lê Hoàng Sơn | Cả ba shape, benchmark, báo cáo | ab4980b (workflow), bae4f5e (single), 9e07c98 (orchestrator) | `src/tests/test_workflow_shape.py`: `test_workflow_ignores_ticket_delay_on_seed_55`, `test_workflow_trace_has_no_secret_or_pii`, `test_workflow_replay_keeps_one_ledger_row` |
 
 ## Cá nhân
 
