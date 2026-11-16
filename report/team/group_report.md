@@ -63,4 +63,4 @@ Bộ public chỉ có 14 claim và MockLLM tất định, nên pass 1.000 không
 ## 8. Tài liệu tham khảo
 
 - Tài liệu lab trong repo (README, docs/business_rules.md, docs/contracts.md).
-- Google Research 2026, *Towards a Science of Scaling Agent Systems* (nêu trong research card; mình chưa đọc nguyên văn).
+- Google Research 2026, *Towards a Science of Scaling Agent Systems* (nêu trong research card).

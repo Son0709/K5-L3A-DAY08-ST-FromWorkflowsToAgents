@@ -9,7 +9,7 @@
 - Pass rate / pass^5 / seed min-max / variance: 1.000 / 1.000 / 1.000-1.000 / 0.000000 (src/reports/benchmark.json, 14 claim x 5 seed)
 - Cost per success (mô phỏng, VND): 28.78 (single 38.99, orchestrator 57.50, swarm 49.57)
 - Crash safety: 20/20 (src/reports/crash.json)
-- Secret leak / approval bypass: 0 / 0 trên bộ public (quét 280 file trace không có CANARY_SECRET, parent_secret, raw_headers). Tự kiểm `student_drop/` (src/reports/hidden_selfcheck.json): workflow chạy hết 40 claim x 5 seed không lỗi, 0 trial nghi lộ secret; không có nhãn nên chưa có pass rate hidden
+- Secret leak / approval bypass: 0 / 0 trên bộ public (quét 880 file trace không có CANARY_SECRET, parent_secret, raw_headers). Tự kiểm `student_drop/` (src/reports/hidden_selfcheck.json): workflow chạy hết 40 claim x 5 seed không lỗi, 0 trial nghi lộ secret; không có nhãn nên chưa có pass rate hidden
 Ví dụ một dòng đã điền: `- Shape chọn: workflow`, `- Crash safety: 20/20 (src/reports/crash.json)`.
 
 ## Vì sao shape này
@@ -22,7 +22,7 @@ Giữ workflow. Trên bộ public multi-agent không cho pass cao hơn mà chỉ
 
 ## Trace và bằng chứng
 
-Trace của workflow ghi: `lookup_order` (chỉ order view đã qua allowlist `ORDER_FIELDS`), `quote`, `issue_refund` (ok, reason, conflict), `decision`, và `crash` khi có crash. Cố ý không ghi: nguyên claim row (có `parent_secret`, `raw_headers`), nguyên order row (SĐT, địa chỉ, ghi chú nội bộ, tên hàng) và nội dung `ticket`, vì ticket là dữ liệu người dùng và có thể mang secret. Shape đọc claim qua `get_claim_view` và chỉ dùng `order_id`, `principal_id`. Trace chỉ nằm ở `traces/<run_id>.json`, nơi grader quét. Kiểm bằng cách grep 280 file trace và test `test_workflow_trace_has_no_secret_or_pii`.
+Trace của workflow ghi: `lookup_order` (chỉ order view đã qua allowlist `ORDER_FIELDS`), `quote`, `issue_refund` (ok, reason, conflict), `decision`, và `crash` khi có crash. Cố ý không ghi: nguyên claim row (có `parent_secret`, `raw_headers`), nguyên order row (SĐT, địa chỉ, ghi chú nội bộ, tên hàng) và nội dung `ticket`, vì ticket là dữ liệu người dùng và có thể mang secret. Shape đọc claim qua `get_claim_view` và chỉ dùng `order_id`, `principal_id`. Trace chỉ nằm ở `traces/<run_id>.json`, nơi grader quét. Kiểm bằng cách grep 880 file trace và test `test_workflow_trace_has_no_secret_or_pii`.
 
 ## Giới hạn
 
