@@ -9,7 +9,7 @@
 - Pass rate / pass^5 / seed min-max / variance: 1.000 / 1.000 / 1.000-1.000 / 0.000000 (src/reports/benchmark.json, 14 claim x 5 seed)
 - Cost per success (mô phỏng, VND): 28.78 (single 38.99, orchestrator 57.50, swarm 49.57)
 - Crash safety: 20/20 (src/reports/crash.json)
-- Secret leak / approval bypass: 0 / 0 trên bộ public (quét 280 file trace không có CANARY_SECRET, parent_secret, raw_headers). Chưa có số từ bộ hidden
+- Secret leak / approval bypass: 0 / 0 trên bộ public (quét 280 file trace không có CANARY_SECRET, parent_secret, raw_headers). Tự kiểm `student_drop/` (src/reports/hidden_selfcheck.json): workflow chạy hết 40 claim x 5 seed không lỗi, 0 trial nghi lộ secret; không có nhãn nên chưa có pass rate hidden
 Ví dụ một dòng đã điền: `- Shape chọn: workflow`, `- Crash safety: 20/20 (src/reports/crash.json)`.
 
 ## Vì sao shape này
@@ -28,4 +28,4 @@ Trace của workflow ghi: `lookup_order` (chỉ order view đã qua allowlist `O
 
 MockLLM không phải model sản xuất. Latency để `unavailable`. Không sửa JSON cho đủ 0.75.
 
-Bộ public chỉ có 14 claim và MockLLM tất định, nên pass 1.000 ở đây không chứng minh được pass rate hidden. Kết luận chỉ đúng với bộ public. Cost là cost mô phỏng. Chưa chạy bộ `student_drop/`, nên chưa có số hidden.
+Bộ public chỉ có 14 claim và MockLLM tất định, nên pass 1.000 ở đây không chứng minh được pass rate hidden. Kết luận chỉ đúng với bộ public. Cost là cost mô phỏng. Bộ `student_drop/` không có nhãn nên chưa có pass rate hidden.
