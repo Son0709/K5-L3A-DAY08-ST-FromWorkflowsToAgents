@@ -28,7 +28,7 @@ Phần này nối tiếp phần mini research ở buổi lý thuyết (slide 62�
 ## Kết quả ablation
 
 - Lệnh đã chạy (copy nguyên văn): `python -m lab8.benchmark --shapes workflow,single,orchestrator,swarm --cases data/public_claims.jsonl --seeds 11,22,33,44,55 --out reports/benchmark.json`
-- Run id / file report: `src/reports/benchmark.json` (by_shape.workflow, by_shape.orchestrator), commit 9e07c98
+- Run id / file report: `src/reports/benchmark.json` (by_shape.workflow, by_shape.orchestrator), commit 68d2410
 - Kết quả so với hypothesis (đúng / sai / không kết luận được), kèm số liệu: Đúng. Pass rate cả hai đều 1.000, pass^5 1.000, variance 0. Cost/success workflow 28.78 so với orchestrator 57.50 (gấp 2.0 lần). Chỉ kết luận trong phạm vi bộ public.
 - Giới hạn: MockLLM không phải model sản xuất, latency là `unavailable`.
 
